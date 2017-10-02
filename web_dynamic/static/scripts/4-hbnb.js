@@ -34,10 +34,10 @@ $(document).ready(function(){
 
         let $places = $('.places');
         $places.empty();
-        let $articles = $('<articles>');
-        $places.append($articles);
+        $places.append('<h1>Places</h1>');
 
         $(response).each( function(idx, place) {
+          let $article = $('<article>');
           //Max Guest
           var $maxGuest = $('<div class="max_guest"></div>');
           $maxGuest.append('<i class="fa fa-users fa-3x" aria-hidden="true"></i><br />');
@@ -51,7 +51,7 @@ $(document).ready(function(){
           $numBathrooms.append('<i class="fa fa-bath fa-3x" aria-hidden="true"></i><br />');
           $numBathrooms.append(place['number_bathrooms'] + ' Bathrooms');
 
-          $articles.append(
+          $article.append(
             $('<div class="title"></div>').append(
               $('<h2></h2>').text(place.name),
               $('<div class="price_by_night"></div>').text('$' + place['price_by_night'])
@@ -60,6 +60,7 @@ $(document).ready(function(){
             $('<div class="user"></div>'),
             $('<div class="description"></div>').text(place['description'])
           );
+          $places.append($article);
         })
       }
     })
