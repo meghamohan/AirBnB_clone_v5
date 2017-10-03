@@ -19,35 +19,38 @@ $(document).ready(function () {
     }
   });
 
-
-  let myDictState = {}
-  //task1 of advanced
+  let mainDict = {};
+  let stateCityAmenities = '';
+  let myDictState = {};
+  let myDictCity = {};
+  // task1 of advanced
   $('.locations ul h2 input[type=checkbox]').click(function () {
     if (this.checked) {
       myDictState[($(this).attr('data-id'))] = ($(this).attr('data-name'));
     } else {
       delete myDictState[$(this).attr('data-id')];
     }
-    let myStringState = ''
-    myStringState = Object.values(myDictState);
-    let stateAmenities = myStringState.join(', ');
-    $('.locations h4').text(this.text + stateAmenities);
+    let myStringState = '';
+    mainDict = Object.assign({}, myDictState, myDictCity);
+    myStringState = Object.values(mainDict);
+    stateCityAmenities = myStringState.join(', ');
+    $('.locations h4').text(stateCityAmenities);
   });
 
-  let myDictCity = {}
   $('.locations ul li input[type=checkbox]').click(function () {
     if (this.checked) {
       myDictCity[($(this).attr('data-id'))] = ($(this).attr('data-name'));
     } else {
       delete myDictCity[$(this).attr('data-id')];
     }
-    let myStringCity = ''
-    myStringCity = Object.values(myDictCity);
-    let cityAmenities = myStringCity.join(', ');
-    $('.locations h4').text(cityAmenities);
+    let myStringCity = '';
+    mainDict = Object.assign({}, myDictState, myDictCity);
+    myStringCity = Object.values(mainDict);
+    stateCityAmenities = myStringCity.join(', ');
+    $('.locations h4').text(stateCityAmenities);
   });
- 
- showPlaces({});
+
+  showPlaces({});
  // task 4
   function showPlaces (placesList) {
     $.ajax({
@@ -98,6 +101,8 @@ $(document).ready(function () {
   $('button').on('click', function () {
     let checkBoxDict = {};
     checkBoxDict['amenities'] = Object.keys(myDict);
+    checkBoxDict['states'] = Object.keys(myDictState);
+    checkBoxDict['cities'] = Object.keys(myDictCity);
     showPlaces(checkBoxDict);
   });
 });
