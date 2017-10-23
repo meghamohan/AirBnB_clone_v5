@@ -114,3 +114,18 @@ def places_search():
         places_amenities = all_places
     result = [place.to_json() for place in places_amenities]
     return jsonify(result)
+
+@app_views.route('/placesFromMap/', methods=['POST'])
+def places_from_markers():
+    place_ids = request.get_json()
+    place_list = []
+    if place_ids:
+        for pid in place_ids:
+            place_obj = storage.get('Place', pid)
+            if place_obj is None:
+                abort(404, 'Not found')
+            place_list.append(place_obj)
+        result = [place.to_json() for place in place_list]
+        return jsonify(result)
+    else:
+        abort(404, 'Not found')

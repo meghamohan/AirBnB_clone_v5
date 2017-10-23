@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- HEAD -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Holberton AirBnB</title>
+
+    <!-- BOOTSTRAP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <style>
+      aside {float: right;}
+    </style>
+    <!-- FAVICON -->
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}">
+
+    <!-- **********************
+	 CSS styles
+	 ********************** -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places_eoy.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') }}?{{ cache_id }}">
+    <style>
+      #map {
+        min-height: 460px;
+        min-width: 450px;
+	margin: 30px auto;
+        position: relative;
+        float: left;
+      }
+      section.places.col-sm-8 {
+        overflow: auto;
+        height: 100vh;
+      }
+      .container .filters .popover {
+        position: relative;
+      }
+    </style>  
+
+    <!-- **********************
+     SCRIPTS
+    ********************** -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/eoyProject.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJvsM9l018_YvSfnoVqu_PNPjwMW0X0gI"></script>
+    <script>
+    </script>
+  </head>
+  <!-- **********************
+       BODY
+       ********************** -->
+
+  <body>
+
+    <!-- **********************
+	 HEADER
+	 ********************** -->
+
+    <header>
+      <div id="api_status"></div>
+    </header>
+    <main>
+      <div class="container">
+
+	<!-- **********************
+	     FILTERS
+	     ********************** -->
+	<section class="filters">
+
+	  <!-- **********************
+	       LOCATIONS
+	       ********************** -->
+
+	  <div class="locations">
+	    <h3>States</h3>
+	    <h4>&nbsp;</h4>
+	    <ul class="popover">
+	      {% for state in states|dictsort %}
+	      <H2>{{ state[0] }}</H2>
+	      <UL>
+		{% for city in state[1].cities|sort(attribute='name') %}
+		<LI>{{ city.name }}</LI>
+		{% endfor %}
+	      </UL>
+	      {% endfor %}
+	    </ul>
+	  </div>
+
+	  <!-- **********************
+	       AMENITIES
+	       ********************** -->
+
+	  <div class="amenities">
+	    <h3>Amenities</h3>
+	    <h4>&nbsp;</h4>
+	    <ul class="popover">
+	      {% for amenity in amens|sort(attribute='name') %}
+	      <LI><INPUT type="checkbox" id="amn_checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}" style="margin-right:10px;">{{ amenity.name }}</LI>
+	      {% endfor %}
+	    </ul>
+	  </div>
+
+	  <!-- **********************
+	       SEARCH BUTTON
+	       ********************** -->
+
+	  <button id="searchButton">Search</button>
+	</section>
+	<div class="row">
+	  <section class="places col-sm-8">
+	    <h1>Places</h1>
+	  </section>
+          <section class="col-sm-4">
+            <div id="map" class=""></div>
+            <button id="fetchMarkers">Display listings</button>
+          </section>
+	</div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+      Holberton School
+    </footer>
+  </body>
+</html>
