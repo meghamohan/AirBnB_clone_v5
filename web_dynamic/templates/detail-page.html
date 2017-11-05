@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- HEAD -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Holberton AirBnB</title>
+
+    <!-- FAVICON -->
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}">
+
+    <!-- **********************
+         CSS styles
+         ********************** -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') }}?{{ cache_id }}">
+    <style>
+      .container .places article {
+        width: auto;
+        border: aliceblue;
+      }
+    </style>
+    <!-- **********************
+     SCRIPTS
+    ********************** -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/2-hbnb.js"></script>
+  </head>
+  <!-- **********************
+       BODY
+       ********************** -->
+
+  <body>
+    <header>
+    </header>
+    <main>
+      <div class="container">
+
+        <!-- **********************
+             FILTERS
+             ********************** -->
+
+
+        <section class="places">
+          <h1 style="display: flex; justify-content: center;">{{ place.name }}</h1>
+
+          <article>
+            <img src="http://i.imgur.com/EaculFy.jpg" alt="Smiley face">
+          </article>
+
+          <article>
+            <div class="title">
+
+              <h2>{{ place.name }}</h2>
+
+              <div class="price_by_night">
+
+                {{ place.price_by_night }}
+
+              </div>
+            </div>
+            <div class="information">
+              <div class="max_guest">
+                <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+
+                <br />
+
+                {{ place.max_guest }} Guests
+
+              </div>
+              <div class="number_rooms">
+                <i class="fa fa-bed fa-3x" aria-hidden="true"></i>
+
+                <br />
+
+                {{ place.number_rooms }} Bedrooms
+              </div>
+              <div class="number_bathrooms">
+                <i class="fa fa-bath fa-3x" aria-hidden="true"></i>
+
+                <br />
+
+                {{ place.number_bathrooms }} Bathroom
+
+              </div>
+            </div>
+
+            <!-- **********************
+                 USER
+                 **********************  -->
+
+            <div class="description">
+
+              {{ place.description }}
+
+            </div>
+          </article> <!-- End 1 PLACE Article -->
+
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+      Holberton School
+    </footer>
+  </body>
+</html>
