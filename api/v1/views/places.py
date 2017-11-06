@@ -9,6 +9,10 @@ from models import storage, CNC
 from os import environ
 STORAGE_TYPE = environ.get('HBNB_TYPE_STORAGE')
 
+@app_views.route('/hello', methods=['GET'])
+def hello():
+    print("hello!!>>>>>>>>>>>>>>>>>>>>>")
+    return "hello", 200
 
 @swag_from('swagger_yaml/places_by_city.yml', methods=['GET', 'POST'])
 @app_views.route('/cities/<city_id>/places', methods=['GET', 'POST'])
@@ -52,6 +56,8 @@ def places_with_id(place_id=None):
         places route to handle http methods for given place
     """
     place_obj = storage.get('Place', place_id)
+    print(">>>>>>HERE<<<<<<<<<<<<")
+    print(place_id)
     if place_obj is None:
         abort(404, 'Not found')
 
@@ -78,6 +84,7 @@ def places_search():
     """
     all_places = [p for p in storage.all('Place').values()]
     req_json = request.get_json()
+    print(req_json)
     if req_json is None:
         abort(400, 'Not a JSON')
     states = req_json.get('states')

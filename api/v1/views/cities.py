@@ -61,3 +61,30 @@ def cities_with_id(city_id=None):
             abort(400, 'Not a JSON')
         city_obj.bm_update(req_json)
         return jsonify(city_obj.to_json()), 200
+
+
+@app_views.route('/cities_ids', methods=['GET'])
+def cities_name_and_id():
+    """
+        cities route to handle http method for cities name and id
+    """
+    if request.method == 'GET':
+        all_cities = storage.all('City')
+        state_cities = [obj.to_json() for obj in all_cities.values()]
+        final_dict = {}
+        for city in state_cities:
+            final_dict[city["name"]] = city["id"]
+        return jsonify(final_dict), 200
+
+@app_views.route('/states_ids', methods=['GET'])
+def states_name_and_id():
+    """
+        states route to handle http method for states name and id
+    """
+    if request.method == 'GET':
+        all_states = storage.all('State')
+        states = [obj.to_json() for obj in all_states.values()]
+        final_dict = {}
+        for state in states:
+            final_dict[state["name"]] = state["id"]
+        return jsonify(final_dict), 200

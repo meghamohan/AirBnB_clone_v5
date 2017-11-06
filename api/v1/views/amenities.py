@@ -55,3 +55,17 @@ def amenities_with_id(amenity_id=None):
             abort(400, 'Not a JSON')
         amenity_obj.bm_update(req_json)
         return jsonify(amenity_obj.to_json()), 200
+
+@app_views.route('/amenities_ids/', methods=['GET', 'POST'])
+def amenities_id():
+    """
+        amenities route that handles http requests
+    """
+    if request.method == 'GET':
+        all_amenities = storage.all('Amenity')
+        all_amenities = [obj.to_json() for obj in all_amenities.values()]
+        final_dict = {}
+        for amn in all_amenities:
+            final_dict[amn["name"]] = amn["id"]
+
+        return jsonify(final_dict)
