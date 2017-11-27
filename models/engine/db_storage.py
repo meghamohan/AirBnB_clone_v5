@@ -41,6 +41,8 @@ class DBStorage:
                 os.environ.get('HBNB_MYSQL_DB')))
         if os.environ.get("HBNB_ENV") == 'test':
             Base.metadata.drop_all(self.__engine)
+        
+        #input("{}".format(self.__engine))
 
     def all(self, cls=None):
         """

@@ -48,6 +48,19 @@
       .container .filters .popover {
         position: relative;
       }
+      #fetchMarkers {
+        color: black;
+        border: 2px solid #e7e7e7;
+        background-color: red; /* Green */
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
     </style>  
 
     <!-- **********************
@@ -98,6 +111,7 @@
             </ul>
           </div>
 
+
 	  <!-- **********************
 	       AMENITIES
 	       ********************** -->
@@ -117,14 +131,18 @@
 	       ********************** -->
 
 	  <button id="searchButton">Search</button>
+          <!-- SPEECH API -->
+          <button id="start_button">Speak</button>
 	</section>
+
+
 	<div class="row">
 	  <section class="places col-sm-8">
 	    <h1>Places</h1>
 	  </section>
           <section class="col-sm-4">
             <div id="map" class=""></div>
-            <button id="fetchMarkers">Display listings</button>
+            <button id="fetchMarkers">Search from Map</button>
           </section>
 	</div>
       </div>
